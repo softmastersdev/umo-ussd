@@ -21,7 +21,7 @@ use Sparors\Ussd\Ussd;
  *   MSISDN   – echo back phone number
  *   MSG      – screen text
  *   USERDATA – echo back input
- *   MSGTYPE  – true = terminate session, false = continue (prompt for input)
+ *   MSGTYPE  – true = continue (expect input), false = terminate session
  *   USERID   – echo back user ID
  *
  * NOTE: Unlike Africa's Talking, Nalo sends only the current screen's input
@@ -44,7 +44,7 @@ class Nalo implements Configurator
                 'MSISDN'   => $phone,
                 'MSG'      => $message,
                 'USERDATA' => request('USERDATA'),
-                'MSGTYPE'  => $terminating,
+                'MSGTYPE'  => !$terminating,
                 'USERID'   => request('USERID'),
             ]);
         });

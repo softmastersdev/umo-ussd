@@ -5,19 +5,17 @@ namespace App\Ussd\States;
 use App\Ussd\Actions\AuthAction;
 use Sparors\Ussd\Attributes\Transition;
 use Sparors\Ussd\Context;
-use Sparors\Ussd\Contracts\InitialState;
+use Sparors\Ussd\Contracts\State;
 use Sparors\Ussd\Decisions\Fallback;
 use Sparors\Ussd\Menu;
 use Sparors\Ussd\Record;
 
 #[Transition(to: AuthAction::class, match: new Fallback(), callback: [self::class, 'setPin'])]
-class EnterPinState implements InitialState
+class EnterPinState implements State
 {
     public function render(): Menu
     {
         return Menu::build()
-            ->line('Welcome to UmoPay')
-            ->line('Your mobile money wallet')
             ->text('Enter PIN:');
     }
 

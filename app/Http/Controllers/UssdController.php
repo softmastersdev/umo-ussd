@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Ussd\Configurators\AfricasTalking;
 use App\Ussd\Configurators\Arkesel;
 use App\Ussd\Configurators\Nalo;
-use App\Ussd\States\EnterPinState;
+use App\Ussd\States\MainMenuState;
 use Sparors\Ussd\Ussd;
 
 class UssdController extends Controller
@@ -17,7 +17,7 @@ class UssdController extends Controller
     {
         return Ussd::build()
             ->useConfigurator($configurator)
-            ->useInitialState(EnterPinState::class)
+            ->useInitialState(MainMenuState::class)
             ->run();
     }
 

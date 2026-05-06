@@ -35,16 +35,21 @@ class ConfirmState implements State
             $menu->line("Network: $network");
         }
 
-        return $menu
-            ->line("Amount: GHS $amount")
-            ->line('Fee: GHS 0.00')
-            ->line('--')
-            ->line('Enter PIN to confirm:')
-            ->text('0. Cancel');
+        $menu->line("Amount: GHS $amount")
+             ->line('Fee: GHS 0.00')
+             ->line('--');
+
+        if ($error = $record->get('pin_error')) {
+            $menu->line($error);
+        }
+
+        return $menu->line('Enter PIN to confirm:')
+                    ->text('0. Cancel');
     }
 
     public function setPin(Context $context, Record $record): void
     {
         $record->set('confirm_pin', $context->input());
+        $record->forget('pin_error');
     }
 }
