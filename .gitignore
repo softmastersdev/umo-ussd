@@ -1,0 +1,74 @@
+# Laravel
+/bootstrap/cache/*
+!/bootstrap/cache/.gitkeep
+/storage/*.key
+/storage/app/public/*
+!/storage/app/public/.gitkeep
+/storage/debugbar
+/storage/framework/cache/data/*
+!/storage/framework/cache/data/.gitkeep
+/storage/framework/sessions/*
+!/storage/framework/sessions/.gitkeep
+/storage/framework/testing/*
+!/storage/framework/testing/.gitkeep
+/storage/framework/views/*
+!/storage/framework/views/.gitkeep
+/storage/logs/*
+!/storage/logs/.gitkeep
+/storage/pail
+
+# Environment
+.env
+.env.backup
+.env.production
+.env.staging
+.env.testing
+.env.*.local
+
+# Dependencies
+/vendor
+/node_modules
+
+# Build artifacts
+/public/build
+/public/hot
+/public/storage
+
+# Auth / credentials
+/auth.json
+
+# Testing
+.phpunit.result.cache
+/.phpunit.cache
+/coverage
+/.php-cs-fixer.cache
+
+# Database
+/database/database.sqlite
+/database/*.sqlite
+
+# IDE
+/.idea
+/.vscode
+/.fleet
+/.nova
+/.zed
+.phpactor.json
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Vagrant
+Homestead.json
+Homestead.yaml
