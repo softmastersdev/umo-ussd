@@ -115,6 +115,7 @@
             background: #f8fafc;
             border: 1px solid #e2e8f0;
             border-radius: 8px;
+            overflow: hidden;
         }
 
         .method {
@@ -127,15 +128,25 @@
             flex-shrink: 0;
         }
 
+        .endpoint-info {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+            flex: 1;
+            min-width: 0;
+        }
+
         .path {
             font-family: 'SFMono-Regular', Consolas, monospace;
-            font-size: 0.82rem;
+            font-size: 0.8rem;
             color: #0f172a;
-            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .provider {
-            font-size: 0.75rem;
+            font-size: 0.72rem;
             color: #94a3b8;
         }
 
@@ -217,26 +228,34 @@
         <div class="endpoints">
             <div class="endpoint">
                 <span class="method">POST</span>
-                <span class="path">{{ url('/ussd/at') }}</span>
-                <span class="provider">Africa's Talking</span>
+                <div class="endpoint-info">
+                    <span class="path">{{ url('/ussd/at') }}</span>
+                    <span class="provider">Africa's Talking</span>
+                </div>
                 <button class="copy-btn" onclick="copyUrl(this, '{{ url('/ussd/at') }}')">Copy</button>
             </div>
             <div class="endpoint">
                 <span class="method">POST</span>
-                <span class="path">{{ url('/ussd/nalo') }}</span>
-                <span class="provider">Nalo Solutions</span>
+                <div class="endpoint-info">
+                    <span class="path">{{ url('/ussd/nalo') }}</span>
+                    <span class="provider">Nalo Solutions</span>
+                </div>
                 <button class="copy-btn" onclick="copyUrl(this, '{{ url('/ussd/nalo') }}')">Copy</button>
             </div>
             <div class="endpoint">
                 <span class="method">POST</span>
-                <span class="path">{{ url('/ussd/arkesel') }}</span>
-                <span class="provider">Arkesel</span>
+                <div class="endpoint-info">
+                    <span class="path">{{ url('/ussd/arkesel') }}</span>
+                    <span class="provider">Arkesel</span>
+                </div>
                 <button class="copy-btn" onclick="copyUrl(this, '{{ url('/ussd/arkesel') }}')">Copy</button>
             </div>
             <div class="endpoint">
                 <span class="method">GET</span>
-                <span class="path">{{ url('/health') }}</span>
-                <span class="provider">JSON status</span>
+                <div class="endpoint-info">
+                    <span class="path">{{ url('/health') }}</span>
+                    <span class="provider">JSON status</span>
+                </div>
                 <button class="copy-btn" onclick="copyUrl(this, '{{ url('/health') }}')">Copy</button>
             </div>
         </div>
