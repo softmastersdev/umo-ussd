@@ -1,10 +1,36 @@
 <?php
 
 use App\Http\Controllers\UssdController;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    try {
+        DB::connection()->getPdo();
+        $dbOk = true;
+    } catch (\Exception) {
+        $dbOk = false;
+    }
+    return view('status', compact('dbOk'));
+});
+
+Route::get('/health', function () {
+    try {
+        DB::connection()->getPdo();
+        $dbOk = true;
+    } catch (\Exception) {
+        $dbOk = false;
+    }
+
+    return response()->json([
+        'status'    => 'ok',
+        'service'   => 'umopay-ussd-gateway',
+        'env'       => config('app.env'),
+        'timestamp' => now()->toIso8601String(),
+        'checks'    => [
+            'database' => $dbOk ? 'ok' : 'error',
+        ],
+    ], $dbOk ? 200 : 503);
 });
 
 /*
