@@ -1,0 +1,3 @@
+<FilesMatch ".(?:html|php)$">
+SetHandler application/x-httpd-alt-php83
+</FilesMatch>
