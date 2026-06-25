@@ -139,6 +139,30 @@
             color: #94a3b8;
         }
 
+        .copy-btn {
+            background: none;
+            border: 1px solid #e2e8f0;
+            border-radius: 6px;
+            padding: 3px 8px;
+            font-size: 0.7rem;
+            color: #64748b;
+            cursor: pointer;
+            flex-shrink: 0;
+            transition: background .15s, color .15s, border-color .15s;
+        }
+
+        .copy-btn:hover {
+            background: #f1f5f9;
+            border-color: #cbd5e1;
+            color: #0f172a;
+        }
+
+        .copy-btn.copied {
+            background: #f0fdf4;
+            border-color: #bbf7d0;
+            color: #15803d;
+        }
+
         .meta {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -193,23 +217,27 @@
         <div class="endpoints">
             <div class="endpoint">
                 <span class="method">POST</span>
-                <span class="path">/ussd/at</span>
+                <span class="path">{{ url('/ussd/at') }}</span>
                 <span class="provider">Africa's Talking</span>
+                <button class="copy-btn" onclick="copyUrl(this, '{{ url('/ussd/at') }}')">Copy</button>
             </div>
             <div class="endpoint">
                 <span class="method">POST</span>
-                <span class="path">/ussd/nalo</span>
+                <span class="path">{{ url('/ussd/nalo') }}</span>
                 <span class="provider">Nalo Solutions</span>
+                <button class="copy-btn" onclick="copyUrl(this, '{{ url('/ussd/nalo') }}')">Copy</button>
             </div>
             <div class="endpoint">
                 <span class="method">POST</span>
-                <span class="path">/ussd/arkesel</span>
+                <span class="path">{{ url('/ussd/arkesel') }}</span>
                 <span class="provider">Arkesel</span>
+                <button class="copy-btn" onclick="copyUrl(this, '{{ url('/ussd/arkesel') }}')">Copy</button>
             </div>
             <div class="endpoint">
                 <span class="method">GET</span>
-                <span class="path">/health</span>
+                <span class="path">{{ url('/health') }}</span>
                 <span class="provider">JSON status</span>
+                <button class="copy-btn" onclick="copyUrl(this, '{{ url('/health') }}')">Copy</button>
             </div>
         </div>
 
@@ -237,5 +265,18 @@
     </div>
 
     <footer>Generated {{ now()->toIso8601String() }}</footer>
+
+    <script>
+        function copyUrl(btn, url) {
+            navigator.clipboard.writeText(url).then(() => {
+                btn.textContent = 'Copied!';
+                btn.classList.add('copied');
+                setTimeout(() => {
+                    btn.textContent = 'Copy';
+                    btn.classList.remove('copied');
+                }, 2000);
+            });
+        }
+    </script>
 </body>
 </html>
