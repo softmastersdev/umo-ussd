@@ -286,15 +286,29 @@
     <footer>Generated {{ now()->toIso8601String() }}</footer>
 
     <script>
+        function flash(btn) {
+            btn.textContent = 'Copied!';
+            btn.classList.add('copied');
+            setTimeout(() => {
+                btn.textContent = 'Copy';
+                btn.classList.remove('copied');
+            }, 2000);
+        }
+
         function copyUrl(btn, url) {
-            navigator.clipboard.writeText(url).then(() => {
-                btn.textContent = 'Copied!';
-                btn.classList.add('copied');
-                setTimeout(() => {
-                    btn.textContent = 'Copy';
-                    btn.classList.remove('copied');
-                }, 2000);
-            });
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(url).then(() => flash(btn));
+            } else {
+                const el = document.createElement('textarea');
+                el.value = url;
+                el.style.cssText = 'position:fixed;opacity:0;pointer-events:none';
+                document.body.appendChild(el);
+                el.focus();
+                el.select();
+                document.execCommand('copy');
+                document.body.removeChild(el);
+                flash(btn);
+            }
         }
     </script>
 </body>
